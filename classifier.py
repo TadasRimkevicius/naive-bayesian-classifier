@@ -173,7 +173,7 @@ def classify(model):
                     #For each attribute within an entry
                     if(i < len(model[2])-1):
                         location = model[2][i][1].index(z)
-                        probability = probability * ((model[0][j][i][1][location]+1)/(model[1][j]+len(model[2][len(model[2])-1][1])))
+                        probability = probability * ((model[0][j][i][1][location]+1)/(model[1][j]+len(model[2][i][1])))
                         i = i + 1
                 #Making sure to multiply by the prior probability as well
                 probabilities.append(probability*((model[1][j])/(sum(model[1]))))
@@ -228,7 +228,8 @@ def testAccuracy(model):
     classification = []
     i = 0
     j = 0
-    
+
+    print(model)
     #For each item in the unclassified array
     for x in testingArray:
         #For each possible classification
@@ -238,7 +239,7 @@ def testAccuracy(model):
                 if(i < len(model[2])-1):
                     #Find the location of the selected value, and multiply the probability by that of the value
                     location = model[2][i][1].index(z)
-                    probability = probability * ((model[0][j][i][1][location]+1)/(model[1][j]+len(model[2][len(model[2])-1][1])))
+                    probability = probability * ((model[0][j][i][1][location]+1)/(model[1][j]+len(model[2][i][1])))
                     i = i + 1
             probabilities.append(probability*((model[1][j])/(sum(model[1]))))
             probability = 1
