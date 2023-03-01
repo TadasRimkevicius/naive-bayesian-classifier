@@ -49,7 +49,7 @@ MENU
 		There is no way to train the model from multiple files. All training is done from the single training file.
 
 	CLASSIFYING
-		Prerequisites: Must have trained the model beforehand
+		Prerequisites: Must have a trained model beforehand
 
 		After training the model, it is possible to classify a series of test data. The format of
 		the pre-classified file follows the same format as the training file in the section before,
@@ -57,11 +57,23 @@ MENU
 		the data set, and output it in the same format as the training/test programs
 
 	TESTING
-		Prerequisites: Must have trained the model beforehand
+		Prerequisites: Must have a trained model beforehand
 
 		After training the model, it is also possible to test for the accuracy of the model. The format
 		of the test file is the same as the training file format, except the classification label will
 		now be compared to the predicted label, and output an accuracy percentage to console.
+
+	K-FOLD CROSS VALIDATION
+
+	STRATITFIED SAMPLING
+
+	CONFUSION MATRIX
+		Prerequisited: Must have a trained model beforehand
+
+		It is possible to produce a confusion matrix given a test data set.
+		Selecting this option will prompt you to enter the name of the test
+		data. The program will then use the trained model to produce a
+		corresponding confusion matrix.
 	
 CONTACT
 	For any queries, please contact me (Tadas Rimkevicius) at

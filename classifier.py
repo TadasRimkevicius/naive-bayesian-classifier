@@ -5,13 +5,16 @@ def menuOptions():
     model = []
     
     menuChoice = 4
-    while(menuChoice != '4'):
+    while(menuChoice != '0'):
         menuChoice = input("""
             Choose your desired option:
                 1. Train
                 2. Classify
                 3. Test Accuracy
-                4. Quit
+                4. K-Fold Cross Validation
+                5. Stratified Sampling
+                6. Produce Confusion Matrix
+                0. Quit
                 Enter your choice: """)
         if(menuChoice == '1'):
             model = train()
@@ -19,6 +22,13 @@ def menuOptions():
             classify(model)
         if(menuChoice == '3'):
             testAccuracy(model)
+        if(menuChoice == '4'):
+            crossValidation(model)
+        if(menuChoice == '5'):
+            stratifiedSampling(model)
+        if(menuChoice == '6'):
+            confusionMatrix(model)
+            
     print("\nTerminating...")
 
 def train():
@@ -267,4 +277,65 @@ def testAccuracy(model):
     print("\nTrue positives:",truePositives)
     print("Total elements tested:",total)
     print("Accuracy: ",100*truePositives/total,"%", sep='')
+
+def crossValidation(model):
+    print("crossValidation")
+
+def stratifiedSampling(model):
+    print("stratifiedSampling")
+
+def confusionMatrix(model):
+    testingFile = open(input("\nEnter Testing File Name: "))
+    
+    testingArray = []
+    
+    temp = testingFile.read().split('\n')
+    
+    for x in temp:
+        testingArray.append(x.split(','))
+    testingArray.pop()
+
+    #Classification Function
+    probability = 1
+    probabilities = []
+    classification = []
+    i = 0
+    j = 0
+
+    #For each item in the unclassified array
+    for x in testingArray:
+        #For each possible classification
+        for y in model[2][len(model[2])-1][1]:
+            #For each attribute within an entry in the unclassified array
+            for z in x:
+                if(i < len(model[2])-1):
+                    #Find the location of the selected value, and multiply the probability by that of the value
+                    location = model[2][i][1].index(z)
+                    probability = probability * ((model[0][j][i][1][location]+1)/(model[1][j]+len(model[2][i][1])))
+                    i = i + 1
+            probabilities.append(probability*((model[1][j])/(sum(model[1]))))
+            probability = 1
+            i = 0
+            j = j + 1
+        j = 0
+        #Append the most likely classification to the classifications array
+        classification.append(model[2][len(model[2])-1][1][probabilities.index(max(probabilities))])
+        #Reset the probabilities array to be ready for a new entry
+        probabilities = []
+
+    actualClassLocation = 0
+    predictedClassLocation = 0
+    confusionMatrix = [[0 for x in range(len(model[2][len(model[2])-1][1]))] for y in range(len(model[2][len(model[2])-1][1]))]
+    i = 0
+    for x in classification:
+        predictedClassLocation = model[2][len(model[2])-1][1].index(x)
+        actualClassLocation = model[2][len(model[2])-1][1].index(testingArray[i][len(testingArray[i])-1])
+        confusionMatrix[actualClassLocation][predictedClassLocation] = confusionMatrix[actualClassLocation][predictedClassLocation] + 1
+        i = i + 1
+        
+    print('')
+    for x in confusionMatrix:
+        print(x)
+
+    
 menuOptions()
