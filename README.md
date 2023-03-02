@@ -74,6 +74,9 @@ MENU
 		Selecting this option will prompt you to enter the name of the test
 		data. The program will then use the trained model to produce a
 		corresponding confusion matrix.
+
+		In addition to producing the confusion matrix, precision, sensitivity, and
+		specificity metrics are also all generated.
 	
 CONTACT
 	For any queries, please contact me (Tadas Rimkevicius) at

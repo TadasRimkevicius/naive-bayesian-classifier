@@ -333,9 +333,43 @@ def confusionMatrix(model):
         confusionMatrix[actualClassLocation][predictedClassLocation] = confusionMatrix[actualClassLocation][predictedClassLocation] + 1
         i = i + 1
         
-    print('')
+    print("")
     for x in confusionMatrix:
         print(x)
+    print("")
 
+    i = 0
+    #precision = TP/(TP+FP)
+    precision = 0
+    #sensitivity = TP/(TP+FN)
+    sensitivity = 0
+    #specificity = TN/(TN+FP)
+    specificity = 0
+    
+    for x in confusionMatrix:
+        print(model[2][len(model[2])-1][1][i])
+
+        falsePositive = 0
+        for y in confusionMatrix:
+            if y != x:
+                falsePositive = falsePositive + y[i]
+        precision = (confusionMatrix[i][i])/(falsePositive+confusionMatrix[i][i])
+        print("Precision:   ",precision*100,"%",sep='')
+
+        sensitivity = (confusionMatrix[i][i])/(sum(x))
+        print("Sensitivity: ",sensitivity*100,"%",sep='')
+
+        trueNegatives = 0
+        for y in confusionMatrix:
+            if y != x:
+                trueNegatives = trueNegatives + sum(y) - y[i]
+
+        specificity = trueNegatives/(trueNegatives+falsePositive)
+        print("Specificity: ",specificity*100,"%",sep='')
+        precision = 0
+        sensitivity = 0
+        specificity = 0
+        i = i + 1
+        print("")
     
 menuOptions()
