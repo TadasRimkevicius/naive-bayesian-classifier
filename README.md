@@ -1,4 +1,4 @@
-Tadas Rimkevicius's Naive Bayesian Classifier, Last Updated 02/24/2023
+Tadas Rimkevicius's Naive Bayesian Classifier, Last Updated 03/30/2023
 
 SUMMARY
 	This classifier is a tool used to demonstrate simple bayesian reasoning for use in rudamentary
@@ -64,8 +64,12 @@ MENU
 		now be compared to the predicted label, and output an accuracy percentage to console.
 
 	K-FOLD CROSS VALIDATION
+		Prerequisites: none
 
-	STRATITFIED SAMPLING
+		To validate the accuracy of the naive bayes classifier on a given set of training data, it is
+		possible to perform k-fold cross validation. This will require the name of the meta and training
+		files, and will output the accuracies for each subset tested, as well as a total mean of accuracies.
+		The recommended K level is 10.
 
 	CONFUSION MATRIX
 		Prerequisited: Must have a trained model beforehand
